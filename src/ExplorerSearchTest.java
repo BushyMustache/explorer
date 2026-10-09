@@ -56,4 +56,58 @@ public class ExplorerSearchTest {
         int actual = ExplorerSearch.reachableArea(island);
         assertEquals(5, actual);
     }
+
+    @Test
+    public void testExplorerLocation_middleOfIsland() {
+        int[][] island = {
+            {1,1,1,3,1,2},
+            {3,2,3,2,1,2},
+            {2,2,3,0,1,3},
+            {1,1,1,3,2,2},
+            {3,2,2,2,1,3},
+        };
+        int[] expected = {2, 3};
+        assertArrayEquals(expected, ExplorerSearch.explorerLocation(island));
+    }
+
+    @Test
+    public void testExplorerLocation_topRightCorner() {
+        int[][] island = {
+            {1,1,1,3,1,0},
+            {3,2,3,2,1,2},
+            {2,2,3,1,1,3},
+            {1,1,1,3,2,2},
+            {3,2,2,2,1,3},
+        };
+        int[] expected = {0, 5};
+        assertArrayEquals(expected, ExplorerSearch.explorerLocation(island));
+    }
+
+    @Test
+    public void testExplorerLocation_notFound_throwsExcpetion() {
+        int[][] island = {
+            {1,1,1,3,1,2},
+            {3,2,3,2,1,2},
+            {2,2,3,2,1,3},
+            {1,1,1,3,2,2},
+            {3,2,2,2,1,3},
+        };
+        Exception exception = assertThrows(IllegalArgumentException.class, () -> {
+            ExplorerSearch.explorerLocation(island);
+        });
+        assertEquals("There's no explorer on the island", exception.getMessage());
+    }
+
+    @Test
+    public void testExplorerLocation_at_2_1() {
+        int[][] island = {
+            {1,1,1,3,1,1},
+            {3,2,3,2,1,2},
+            {2,0,3,1,1,3},
+            {1,1,1,3,2,2},
+            {3,2,2,2,1,3},
+        };
+        int[] expected = {2, 1};
+        assertArrayEquals(expected, ExplorerSearch.explorerLocation(island));
+    }
 }
