@@ -87,7 +87,7 @@ public class ExplorerSearch {
         // RIGHT
         newR = curR;
         newC = curC + 1;
-        if (newC < island[newR].length && island[newR][newC] != 2 && island[newR][newC] != 3) {
+        if (newC < island[curR].length && island[newR][newC] != 2 && island[newR][newC] != 3) {
             possible.add(new int[] {newR, newC});
         }
 
